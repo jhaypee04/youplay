@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Tailwindcss CDN start -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body class="text-white">
+    <header class="bg-sky-500 py-5">YouPlay</header>
+    <main class="bg-indigo-700">
+        <div class="container bg-gray-700 mx-auto grid sm:grid-cols-3 gap-2">
+            
+        </div>
+    </main>
+    <footer class="bg-violet-900 py-5">Footer</footer>
+
+    <script>
+        let container = document.querySelector('.container')
+        async function getVids(){
+            const response = await fetch('https://youtube.googleapis.com/youtube/v3/playlists?part=snippet%2CcontentDetails%2Cplayer&channelId=UCK7oVw_ftuBIwiipiBf7ogA&maxResults=25&key=AIzaSyB2UvwB1fpkKIeZEftfTLCanQ0vubq7Wyo')
+            const data = await response.json()
+                console.log(data.items)
+            playlists = data.items
+
+            playlists.forEach((playlist)=>{
+                console.log(playlist.player.embedHtml)
+                container.innerHTML += playlist.player.embedHtml
+
+            })
+        }
+        getVids()
+    </script>
+</body>
+</html>
